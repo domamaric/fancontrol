@@ -103,7 +103,6 @@ static void do_ec(const uint32_t cmd, const uint32_t port, const uint8_t value) 
 }
 
 static void dump_fan_config() {
-	printf("[" ANSI_COLOR_GREEN "OK" ANSI_COLOR_RESET "] Dump FAN\n");
     int raw_duty = read_ec(0xCE);
     int val_duty = (int) ((double) raw_duty / 255.0 * 100.0);
 	int raw_rpm = (read_ec(0xD0) << 8) + (read_ec(0xD1));
@@ -114,6 +113,7 @@ static void dump_fan_config() {
 	else
 		val_rpm = 2156220 / raw_rpm;
 
+	printf("[" ANSI_COLOR_GREEN "OK" ANSI_COLOR_RESET "] Dump FAN\n");
 	printf("     FAN Duty: %d%%\n", val_duty);
 	printf("     FAN RPMs: %d RPM\n", val_rpm);
 	printf("     CPU Temp: %d°C\n", read_ec(0x07));
@@ -152,19 +152,28 @@ int main(int argc, char *argv[]) {
 	int result = ioperm(0x62, 1, 1);
 	result += ioperm(0x66, 1, 1);
 
+	// No sudo permissions exit gracefully
 	if (result != 0) {
 		printf("[" ANSI_COLOR_RED "ERR" ANSI_COLOR_RESET "] ");
 		printf("ioperm() failed! Try using sudo privileges!\n");
 		exit(1);
 	}
 
-	argc--;
-	argv++;
-
-	if (argc <= 0)
+	// No additional arguments passed, print current fan configuration
+	if (argc == 1) {
 		dump_fan_config();
-	else
-		test_fan_config(atoi(*argv));
+		exit(0);
+	}
+
+	// More than one additional argument is sent, exit gracefully
+	if (argc != 2) {
+		printf("[" ANSI_COLOR_RED "ERR" ANSI_COLOR_RESET"] ");
+		printf("Invalid number of arguments! See: sudo ./fanctl --help\n");
+		exit(1);
+	}
+
+	int duty = atoi(argv[1]);  // argv[0] = "./fanctl"
+	test_fan_config(duty);
 	
 	return 0;
 }
