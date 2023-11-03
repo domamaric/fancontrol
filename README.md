@@ -26,11 +26,22 @@ With this project, users can enjoy a tailored and responsive cooling system that
 
 ## Getting Started
 
-[Follow the installation and usage instructions](link_to_your_detailed_documentation) to set up and start using the Fan Control Driver and Control Center on your system.
+To set up and start using the Fan Control Driver and Control Center on your system follow these installation and usage instructions.
 
-## Contribution Guidelines
+Clone this GitHub repo and position yourself accordingly.
+```
+git clone https://github.com/domamaric/fancontrol.git && cd fancontrol
+```
 
-We welcome contributions from the open-source community to enhance this project. Please check our [Contribution Guidelines](link_to_contributing.md) to get involved and help make this project even better.
+Compile C code and run it using sudo privileges It is strongly recommended to put `--help` flag in order to know program functionalities.
+
+```
+gcc fanctl.c -o fanctl
+```
+
+```
+./fanctl --help
+```
 
 ## License
 
@@ -38,7 +49,7 @@ This project is licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE) - see t
 
 ## Acknowledgments
 
-We want to express our gratitude to the open-source community and the contributors who have helped make this project possible.
+I want to express our gratitude to the open-source community and the contributors who have helped make this project possible.
 
 ---
 <!---
