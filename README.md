@@ -26,14 +26,14 @@ With this project, users can enjoy a tailored and responsive cooling system that
 
 ## Getting Started
 
-To set up and start using the Fan Control Driver and Control Center on your system follow these installation and usage instructions.
+So far the only way of controlling fan is to utilize driver component and change values manually. To set up and start using the Fan Control Driver on your system follow these installation and usage instructions.
 
-Clone this GitHub repo and position yourself accordingly.
+Clone this GitHub repo and position working directory accordingly.
 ```
 git clone https://github.com/domamaric/fancontrol.git && cd fancontrol
 ```
 
-Compile C code and run it using sudo privileges It is strongly recommended to put `--help` flag in order to know program functionalities.
+Compile C code and run it using sudo privileges. It is strongly recommended to put `--help` flag in order to know program functionalities.
 
 ```
 gcc fanctl.c -o fanctl
